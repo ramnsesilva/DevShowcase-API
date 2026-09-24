@@ -1,16 +1,18 @@
 package com.example.devshowcaseapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
+import java.util.Set;
 
 public record ProjectRequestDTO(
         @NotBlank(message = "O título é obrigatório")
-        @Size(min = 3, max = 100, message = "O título deve ter entre 3 e 100 caracteres")
         String title,
 
-        @Size(max = 1000, message = "A descrição não pode exceder 1000 caracteres")
+        @NotBlank(message = "A descrição é obrigatória")
         String description,
 
-        @NotBlank(message = "O link do repositório é obrigatório")
-        String repositoryUrl
+        @URL(message = "URL inválida")
+        String repositoryUrl,
+
+        Set<Long> technologyIds
 ) {}
